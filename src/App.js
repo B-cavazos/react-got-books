@@ -4,19 +4,45 @@ import './App.css';
 
 const App = () => {
 
+/* States */
+  //API state
   const [data,setData] = useState([]);
+  //Search state
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredData, setFilteredData] = useState(data);
 
 /* Get data from API */
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios(
-        'https://www.anapioficeandfire.com/api/books'
+    axios('https://www.anapioficeandfire.com/api/books')
+    .then(response => {
+      console.log(response.data)
+      setData(response.data);
+      setFilteredData(response.data);
+    })
+    .catch(error => {
+      console.log('Error getting fake data: ' + error);
+    })
+  }, []);
+
+
+/* Filter useEffect */
+  useEffect(() => {
+    //pt.1
+    const searchData = data.filter(data => {
+      return (
+        data.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
-    setData(response.data);
-    console.log(data);
-    }
-    fetchData();
-  },[])
+    });
+    //pt.2
+    searchTerm === ''
+      ? setFilteredData(data)
+      : setFilteredData(searchData);
+  }, [searchTerm, data]);
+
+ /* Handle Change */ 
+  const handleChange = event => {
+    setSearchTerm(event.target.value);
+  };
 
   return (
     <div id="header" className="App container">
@@ -26,12 +52,20 @@ const App = () => {
       <div  id="display-button" className="row">
         <h2>display button</h2>
       </div>
-      <div id="search-bar" className="row">
-        <h2>search bar</h2>
-      </div>
+      <form id="search-bar" className="row">
+        <div className="form-group col-md-8 offset-2">
+          <input 
+            type="text" 
+            className="form-control" 
+            placeholder="search the books"
+            value={searchTerm}
+            onChange={(event)=>handleChange(event)}
+            />
+        </div>
+      </form>
       <div id="cards" className="row">
         <h2>cards</h2>
-        {data.map((data,i)=>{
+        {filteredData.map((data,i)=>{
           return(
             <div key={i}>
               <p>book:{i+1}</p>
