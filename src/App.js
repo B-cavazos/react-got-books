@@ -1,6 +1,23 @@
+import {useState, useEffect} from 'react'
+import axios from 'axios';
 import './App.css';
 
 const App = () => {
+
+  const [data,setData] = useState([]);
+
+/* Get data from API */
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios(
+      'https://www.anapioficeandfire.com/api/books'
+    );
+    setData(response);
+    console.log(data);
+    }
+  fetchData();
+  },[])
+
   return (
     <div id="header" className="App container">
       <div className="row">
