@@ -39,7 +39,7 @@ const App = () => {
               <p>book:{data.authors}</p>
               <p>{data.numberOfPages} pages</p>
               <p>from:{data.country}</p>
-              <p>released:{data.released}</p><br/><br/><br/>            
+              <p>released:{data.released}</p><br/><br/>            
             </div>            
           )
         })}
@@ -49,3 +49,4 @@ const App = () => {
 }
 
 export default App;
+
