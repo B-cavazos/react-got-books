@@ -10,12 +10,12 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios(
-      'https://www.anapioficeandfire.com/api/books'
-    );
-    setData(response);
+        'https://www.anapioficeandfire.com/api/books'
+      );
+    setData(response.data);
     console.log(data);
     }
-  fetchData();
+    fetchData();
   },[])
 
   return (
@@ -31,6 +31,18 @@ const App = () => {
       </div>
       <div id="cards" className="row">
         <h2>cards</h2>
+        {data.map((data,i)=>{
+          return(
+            <div key={i}>
+              <p>book:{i+1}</p>
+              <p>{data.name}</p>
+              <p>book:{data.authors}</p>
+              <p>{data.numberOfPages} pages</p>
+              <p>from:{data.country}</p>
+              <p>released:{data.released}</p><br/><br/><br/>            
+            </div>            
+          )
+        })}
       </div>
     </div>
   );
