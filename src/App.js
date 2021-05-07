@@ -13,7 +13,7 @@ const App = () => {
   const [filteredData, setFilteredData] = useState(data);
 
 /* Get data from API */
-  useEffect(() => {
+  const RevealBooks = () =>{
     axios('https://www.anapioficeandfire.com/api/books')
     .then(response => {
       console.log(response.data)
@@ -22,9 +22,8 @@ const App = () => {
     })
     .catch(error => {
       console.log('Error getting fake data: ' + error);
-    })
-  }, []);
-
+    })    
+  }
 
 /* Filter useEffect */
   useEffect(() => {
@@ -48,11 +47,13 @@ const App = () => {
   return (
     <div id="header" className="App container">
       <div className="row">
-        <h2>Game of Thrones, but not the show Header</h2>
+        <h2>Game of Thrones (but not the show) Header</h2>
       </div>
+{/* Button */}
       <div  id="display-button" className="row">
-        <h2>display button</h2>
+        <button className="btn col-6 offset-3 btn-warning text-white my-3" onClick={()=>RevealBooks()}>Click this button to reveal the series of books</button>
       </div>
+{/* Searchbar */}
       <form id="search-bar" className="row">
         <div className="form-group col-md-8 offset-2">
           <input 
