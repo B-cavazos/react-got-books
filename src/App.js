@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios';
+import CardComponent from "./components/Card"
 import './App.css';
 
 const App = () => {
@@ -63,20 +64,15 @@ const App = () => {
             />
         </div>
       </form>
+{/* cards */}
       <div id="cards" className="row">
-        <h2>cards</h2>
-        {filteredData.map((data,i)=>{
-          return(
-            <div key={i}>
-              <p>book:{i+1}</p>
-              <p>{data.name}</p>
-              <p>book:{data.authors}</p>
-              <p>{data.numberOfPages} pages</p>
-              <p>from:{data.country}</p>
-              <p>released:{data.released}</p><br/><br/>            
-            </div>            
-          )
-        })}
+        {filteredData.map(d =>{
+         return(
+           <div className="col-3" key={d.name}>
+             <CardComponent data={d}/>
+           </div>
+         )}
+        )}
       </div>
     </div>
   );

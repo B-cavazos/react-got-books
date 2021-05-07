@@ -9,7 +9,7 @@ const CardComponent = ({data}) =>{
                 <h6 className="card-subtitle mb-4 text-muted">By {data.authors}</h6>
                 <p className="card-text">{data.numberOfPages} pages</p>
                 <p className="card-text">From: {data.country}</p>
-                <p className="card-text">Released: {data.released}</p>
+                <p className="card-text">Released: {data.released.slice(0, 10)}</p>
             </div>
             </div>            
         </div>
